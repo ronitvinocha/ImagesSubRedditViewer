@@ -2,6 +2,8 @@
 /app
 Basic UI to show images from /r/images in a recyclerview
 Using MVP architecture to get images url asynchronously
+toggle fullscreen on image on clicking
+uses internet and read and write storage permissions
 
 
 /imageLoader
