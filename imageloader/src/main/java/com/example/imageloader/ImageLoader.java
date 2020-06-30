@@ -1,161 +1,109 @@
 package com.example.imageloader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Collections;
 import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 
-public class ImageLoader {
+public class ImageLoader implements BitworkerTaskRespone{
 
     MemoryCache memoryCache=new MemoryCache();
-    FileCache fileCache;
-    private Map<ImageView, String> imageViews=Collections.synchronizedMap(new WeakHashMap<ImageView, String>());
-    ExecutorService executorService;
+    PhotoToLoad photoToLoad;
+    Context context;
 
     public ImageLoader(Context context){
-        fileCache=new FileCache(context);
-        executorService=Executors.newFixedThreadPool(5);
+        this.context=context;
+
     }
-    public void DisplayImage(String url, ImageView imageView)
+    public void DisplayImage(String url,ImageView imageView)
     {
-        imageViews.put(imageView, url);
-        Bitmap bitmap=memoryCache.get(url);
+        photoToLoad=new PhotoToLoad(url,imageView,context);
+         Log.i("😂🏻",photoToLoad.url);
+         Log.i("😂🏻",String.valueOf(photoToLoad.imageView));
+        Bitmap bitmap=memoryCache.get(photoToLoad.url);
         if(bitmap!=null)
-            //laod bitmap from memory cache as its quick no  thread required
-            imageView.setImageBitmap(bitmap);
+        {
+             photoToLoad.imageView.setImageBitmap(bitmap);
+             Log.i("😘","from memory");
+        }
         else
         {
-            queuePhoto(url, imageView);
+            getBitmap(photoToLoad);
         }
     }
+//
+//    private void queuePhoto(String url, ImageView imageView)
+//    {
+//        PhotoToLoad p=new PhotoToLoad(url, imageView,imageView.getContext());
+//        executorService.submit(new PhotosLoader(p));
+//        //loading bitmap from either disk or network so using threadpool of 5 at a time
+//    }
 
-    private void queuePhoto(String url, ImageView imageView)
+    private void getBitmap(PhotoToLoad photoToLoad)
     {
-        PhotoToLoad p=new PhotoToLoad(url, imageView);
-        executorService.submit(new PhotosLoader(p));
-        //loading bitmap from either disk or network so using threadpool of 5 at a time
+
+        BitmapWorkerTask bitmapWorkerTask=new BitmapWorkerTask(this,photoToLoad.context,photoToLoad.url);
+        bitmapWorkerTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
-
-    private Bitmap getBitmap(String url)
-    {
-        // getting from disk
-        File f=fileCache.getFile(url);
-        Bitmap b = decodeFile(f);
-        if(b!=null)
-            return b;
-        //getting from web
-        try {
-            Bitmap bitmap=null;
-            URL imageUrl = new URL(url);
-            Log.i("👁",url);
-            HttpURLConnection conn = (HttpURLConnection)imageUrl.openConnection();
-            conn.setConnectTimeout(30000);
-            conn.setReadTimeout(30000);
-            conn.setInstanceFollowRedirects(true);
-            InputStream is=conn.getInputStream();
-            OutputStream os = new FileOutputStream(f);
-            //storing file in disk
-            Utils.CopyStream(is, os);
-            os.close();
-            bitmap = decodeFile(f);
-            return bitmap;
-        } catch (Throwable ex){
-            Log.i("❗️",ex.getMessage());
-           ex.printStackTrace();
-           if(ex instanceof OutOfMemoryError)
-               memoryCache.clear();
-           return null;
-        }
+    @Override
+    public void onCallComplete(final Bitmap bitmap) {
+         if(bitmap!=null)
+         {
+             memoryCache.put(String.valueOf(photoToLoad.url.hashCode()),bitmap);
+             if(photoToLoad.imageView!=null)
+             {
+                 Log.i("✌️",bitmap.toString());
+                 try{
+                     photoToLoad.imageView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+                      photoToLoad.imageView.setImageBitmap(bitmap);
+                 }
+                 catch (Exception e)
+                 {
+                     Log.i("❗️",e.getMessage());
+                     e.printStackTrace();
+                 }
+             }
+             else
+             {
+                 Log.i("❗️","imageview coming null ");
+             }
+         }
+         else
+         {
+             Log.i("❗️","bitmap came null from bitmaptask");
+         }
+         //laod bitmap from memory cache as its quick no  threa
     }
 
     //decodes image and scales it to reduce memory consumption
-    private Bitmap decodeFile(File f){
-        try {
-            //decode image size
-            BitmapFactory.Options o = new BitmapFactory.Options();
-            o.inJustDecodeBounds = true;
-            BitmapFactory.decodeStream(new FileInputStream(f),null,o);
 
-            //Find the correct scale value. It should be the power of 2.
-            final int REQUIRED_SIZE=200;
-            int width_tmp=o.outWidth, height_tmp=o.outHeight;
-            int scale=1;
-            while(true){
-                if(width_tmp/2<REQUIRED_SIZE || height_tmp/2<REQUIRED_SIZE)
-                    break;
-                width_tmp/=2;
-                height_tmp/=2;
-                scale*=2;
-            }
-
-            //decode with inSampleSize
-            BitmapFactory.Options o2 = new BitmapFactory.Options();
-            o2.inSampleSize=scale;
-            return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
-        } catch (FileNotFoundException e) {}
-        return null;
-    }
 
     //Task for the queue
     private class PhotoToLoad
     {
         public String url;
         public ImageView imageView;
-        public PhotoToLoad(String u, ImageView i){
+        public Context context;
+        public PhotoToLoad(String u, ImageView i,Context c){
+            context=c;
             url=u;
             imageView=i;
         }
     }
 
-    class PhotosLoader implements Runnable {
-        PhotoToLoad photoToLoad;
-        PhotosLoader(PhotoToLoad photoToLoad){
-            this.photoToLoad=photoToLoad;
-        }
-
-        @Override
-        public void run() {
-            Bitmap bmp=getBitmap(photoToLoad.url);
-            //storing bitmap in memory
-            memoryCache.put(photoToLoad.url, bmp);
-            BitmapDisplayer bd=new BitmapDisplayer(bmp, photoToLoad);
-            //loading bitmap into imageview on ui thread
-            Activity a=(Activity)photoToLoad.imageView.getContext();
-            a.runOnUiThread(bd);
-        }
-    }
-    //Used to display bitmap in the UI thread
-    class BitmapDisplayer implements Runnable
-    {
-        Bitmap bitmap;
-        PhotoToLoad photoToLoad;
-        public BitmapDisplayer(Bitmap b, PhotoToLoad p){bitmap=b;photoToLoad=p;}
-        public void run()
-        {
-            if(bitmap!=null)
-                photoToLoad.imageView.setImageBitmap(bitmap);
-        }
-    }
-
     public void clearCache() {
         memoryCache.clear();
-        fileCache.clear();
     }
 
 }

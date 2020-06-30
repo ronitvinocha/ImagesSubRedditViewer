@@ -17,12 +17,10 @@ public class Utils {
               if(count==-1)
                   break;
               os.write(bytes, 0, count);
-              os.close();
-              is.close();
             }
         }
         catch(Exception ex){
-            Log.i("❗️",ex.getMessage());
+            Log.i("❗ utils️",ex.getMessage());
             ex.printStackTrace();
         }
     }

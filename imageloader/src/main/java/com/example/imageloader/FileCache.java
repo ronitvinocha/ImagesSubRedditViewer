@@ -14,10 +14,7 @@ public class FileCache {
 
     public FileCache(Context context){
         //Find the dir to save cached images
-        if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
-            cacheDir=new File(Environment.getExternalStorageDirectory(),"TTImages_cache");
-        else
-            cacheDir=context.getCacheDir();
+        cacheDir=context.getCacheDir();
         if(!cacheDir.exists())
             cacheDir.mkdirs();
     }

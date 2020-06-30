@@ -13,9 +13,11 @@ class ImagesPresenter(private var iImageApiResult: IImageApiResult):OnApiRespons
                 val children=json.getJSONObject("data").getJSONArray("children")
                 for(i in 0 until children.length())
                 {
-                    val url=children.getJSONObject(i).getJSONObject("data").getString("url_overridden_by_dest")
+                    val url=children.getJSONObject(i).getJSONObject("data").getString("url")
                     if(url.endsWith(".jpeg")|| url.endsWith(".jpg"))
-                    IMAGESURLLIST.add(url)
+                    {
+                         IMAGESURLLIST.add(url)
+                    }
                 }
                 iImageApiResult.onApiCallback(IMAGESURLLIST)
             }
@@ -27,7 +29,7 @@ class ImagesPresenter(private var iImageApiResult: IImageApiResult):OnApiRespons
     }
 
     override fun callApi() {
-        val apiTask=APITask("https://www.reddit.com/r/images/hot.json",this, SUB_REDDIT,null)
+        val apiTask=APITask("https://www.reddit.com/r/ArchitecturePorn.json",this, SUB_REDDIT,null)
         apiTask.execute(null)
     }
 

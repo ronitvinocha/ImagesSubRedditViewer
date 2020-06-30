@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/ronitvinocha/StudioProjects/ImagesSubRedditViewer/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "outputFile": "/Users/ronitvinocha/StudioProjects/reddit/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
             "map": [
                 {
                     "source": "/Users/ronitvinocha/.gradle/caches/transforms-2/files-2.1/8bdc78f309f7ef2e274359e8a4f096da/jetified-appcompat-resources-1.1.0/res/values/values.xml",
@@ -61,6 +61,25 @@
                     }
                 },
                 {
+                    "source": "/Users/ronitvinocha/StudioProjects/reddit/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "53",
+                        "endLines": "9",
+                        "endColumns": "12",
+                        "endOffsets": "487"
+                    },
+                    "to": {
+                        "startLines": "621",
+                        "startColumns": "4",
+                        "startOffsets": "38360",
+                        "endLines": "628",
+                        "endColumns": "12",
+                        "endOffsets": "38794"
+                    }
+                },
+                {
                     "source": "/Users/ronitvinocha/.gradle/caches/transforms-2/files-2.1/c97b0db2e77adb45592bee740aa5d495/cardview-1.0.0/res/values/values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,35,36,37,38,45,47,50,7",
@@ -99,20 +118,20 @@
                     }
                 },
                 {
-                    "source": "/Users/ronitvinocha/StudioProjects/ImagesSubRedditViewer/app/src/main/res/values/colors.xml",
+                    "source": "/Users/ronitvinocha/StudioProjects/reddit/app/src/main/res/values/strings.xml",
                     "from": {
-                        "startLines": "4,2,3",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "153,55,102",
-                        "endColumns": "45,46,50",
-                        "endOffsets": "194,97,148"
+                        "startLines": "1",
+                        "startColumns": "4",
+                        "startOffsets": "16",
+                        "endColumns": "58",
+                        "endOffsets": "70"
                     },
                     "to": {
-                        "startLines": "194,195,196",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "10133,10179,10226",
-                        "endColumns": "45,46,50",
-                        "endOffsets": "10174,10221,10272"
+                        "startLines": "596",
+                        "startColumns": "4",
+                        "startOffsets": "35636",
+                        "endColumns": "58",
+                        "endOffsets": "35690"
                     }
                 },
                 {
@@ -133,22 +152,20 @@
                     }
                 },
                 {
-                    "source": "/Users/ronitvinocha/StudioProjects/ImagesSubRedditViewer/app/src/main/res/values/styles.xml",
+                    "source": "/Users/ronitvinocha/StudioProjects/reddit/app/src/main/res/values/colors.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "53",
-                        "endLines": "9",
-                        "endColumns": "12",
-                        "endOffsets": "487"
+                        "startLines": "4,2,3",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "153,55,102",
+                        "endColumns": "45,46,50",
+                        "endOffsets": "194,97,148"
                     },
                     "to": {
-                        "startLines": "621",
-                        "startColumns": "4",
-                        "startOffsets": "38360",
-                        "endLines": "628",
-                        "endColumns": "12",
-                        "endOffsets": "38794"
+                        "startLines": "194,195,196",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "10133,10179,10226",
+                        "endColumns": "45,46,50",
+                        "endOffsets": "10174,10221,10272"
                     }
                 },
                 {
@@ -206,23 +223,6 @@
                         "endLines": "176,177,238,239,341,342,343,344,345,346,347,455,456,457,458,459,460,461,462,463,464,465,466,467,468,469,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,504,505,506,507,508,509,510,511,512,520,521,533,534,535,536,537,538,539,540,541,542,546,568,611,2336,2340,2341,2345,2346,2714,2715,3836,4038,4070,4108,4115",
                         "endColumns": "71,87,68,62,69,67,71,69,60,73,72,60,60,61,63,61,60,67,99,59,65,72,68,56,51,61,71,75,64,58,58,59,59,59,59,59,59,59,59,59,59,58,59,59,59,59,59,59,59,59,59,59,58,59,59,58,58,58,58,58,58,34,34,54,62,54,57,56,49,60,56,33,34,34,69,70,116,12,109,12,128,71,66,24,24,24,24,24",
                         "endOffsets": "8831,8919,13009,13072,20030,20098,20170,20240,20301,20375,20448,27333,27394,27456,27520,27582,27643,27711,27811,27871,27937,28010,28079,28136,28188,28250,28775,28851,28916,28975,29034,29094,29154,29214,29274,29334,29394,29454,29514,29574,29634,29693,29753,29813,29873,29933,29993,30053,30113,30173,30233,30293,30352,30412,30472,30531,30590,30649,30708,30767,30826,31206,31241,31836,31899,31954,32012,32069,32119,32180,32237,32271,32306,32484,33765,37636,153974,154175,154285,154486,154615,179310,179377,243757,262123,264188,266150,266527"
-                    }
-                },
-                {
-                    "source": "/Users/ronitvinocha/StudioProjects/ImagesSubRedditViewer/app/src/main/res/values/strings.xml",
-                    "from": {
-                        "startLines": "1",
-                        "startColumns": "4",
-                        "startOffsets": "16",
-                        "endColumns": "58",
-                        "endOffsets": "70"
-                    },
-                    "to": {
-                        "startLines": "596",
-                        "startColumns": "4",
-                        "startOffsets": "35636",
-                        "endColumns": "58",
-                        "endOffsets": "35690"
                     }
                 }
             ]

@@ -26,7 +26,8 @@ interface OnApiTimeout {
  * the user.
  */
 class APITask(
-    private val mUrl: String, private val responseCallback: OnApiResponse, reqId: Int,
+    private val mUrl: String,
+    private val responseCallback: OnApiResponse, reqId: Int,
     private val postData: ArrayList<Pair<String, String>>?
 ) : AsyncTask<Void, Void, Boolean>() {
     private var response: String? = null

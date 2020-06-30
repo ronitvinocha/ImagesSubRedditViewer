@@ -7,10 +7,12 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.os.Handler
+import android.view.*
+import android.widget.Adapter
+import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.ListView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -93,6 +95,7 @@ class MainActivity : AppCompatActivity(),IImageApiResult {
         fullscreenlayout.setOnClickListener {
                 main_layout.visibility=View.VISIBLE
                 fullscreenlayout.visibility=View.GONE
+                expanded_image.setImageBitmap(null)
                 showSystemUI()
             }
         }
@@ -105,7 +108,7 @@ class MainActivity : AppCompatActivity(),IImageApiResult {
     }
     private fun callAPI()
     {
-
+        println("✌️ api call");
         if (isNetworkConnected()) {
           mImagesPresenter!!.callApi()
         } else {
@@ -116,40 +119,17 @@ class MainActivity : AppCompatActivity(),IImageApiResult {
         }
     }
     override fun onApiCallback(imagesUrlList: MutableList<String>) {
-         imagerecycler.adapter=ImageViewAdapter(imagesUrlList,this)
-         imagerecycler.layoutManager=LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
-         progressbar.visibility=View.GONE
-         imagerecycler.visibility=View.VISIBLE
-    }
-    inner class ImageViewAdapter internal constructor(
-        private val values: List<String>, context:Context
-    ) : RecyclerView.Adapter<ImageViewAdapter.ViewHolder>() {
-        var imageLoader= ImageLoader(context)
-        private val clickListener = View.OnClickListener { view ->
-            val imageView:ImageView= view as ImageView
-            val tag=imageView.tag.toString().toInt()
-            println("👁 "+values[tag])
-            imageLoader.DisplayImage(values[tag],expanded_image)
+        println("✌️ api call response $imagesUrlList");
+         imagerecycler.adapter=ImageViewAdapter(this,imagesUrlList)
+          progressbar.visibility=View.GONE
+          main_layout.visibility=View.VISIBLE
+
+        imagerecycler.setOnItemClickListener { parent, view, position, id ->
+            var imageLoader=ImageLoader(this)
+            imageLoader.DisplayImage(imagesUrlList[position],expanded_image)
             showfullscreenview()
         }
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.recycleitem, parent, false)
-            return ViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            imageLoader.DisplayImage(values[position],holder.imageView)
-            holder.imageView.setOnClickListener(clickListener)
-            holder.imageView.tag = position
-
-        }
-
-        override fun getItemCount(): Int = values.size
-
-        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val imageView: ImageView = view.findViewById(R.id.recycleitemimageview)
-        }
     }
+
 
 }

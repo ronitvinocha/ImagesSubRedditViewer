@@ -6,9 +6,9 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="23"
-8-->/Users/ronitvinocha/StudioProjects/ImagesSubRedditViewer/imageloader/src/main/AndroidManifest.xml
+8-->/Users/ronitvinocha/StudioProjects/reddit/imageloader/src/main/AndroidManifest.xml
 9        android:targetSdkVersion="29" />
-9-->/Users/ronitvinocha/StudioProjects/ImagesSubRedditViewer/imageloader/src/main/AndroidManifest.xml
+9-->/Users/ronitvinocha/StudioProjects/reddit/imageloader/src/main/AndroidManifest.xml
 10    /
 11
 12</manifest>

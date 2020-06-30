@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/ronitvinocha/StudioProjects/ImagesSubRedditViewer/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-large-v4/values-large-v4.xml",
+            "outputFile": "/Users/ronitvinocha/StudioProjects/reddit/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-large-v4/values-large-v4.xml",
             "map": [
                 {
                     "source": "/Users/ronitvinocha/.gradle/caches/transforms-2/files-2.1/59c7974e59a21dc5facfb0f1773fa266/material-1.0.0/res/values-large-v4/values-large-v4.xml",

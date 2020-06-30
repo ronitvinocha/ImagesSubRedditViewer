@@ -1,27 +1,8 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/ronitvinocha/StudioProjects/ImagesSubRedditViewer/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v23/values-v23.xml",
+            "outputFile": "/Users/ronitvinocha/StudioProjects/reddit/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v23/values-v23.xml",
             "map": [
-                {
-                    "source": "/Users/ronitvinocha/StudioProjects/ImagesSubRedditViewer/app/src/main/res/values-v23/styles.xml",
-                    "from": {
-                        "startLines": "3",
-                        "startColumns": "4",
-                        "startOffsets": "56",
-                        "endLines": "11",
-                        "endColumns": "12",
-                        "endOffsets": "551"
-                    },
-                    "to": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "10",
-                        "endColumns": "12",
-                        "endOffsets": "550"
-                    }
-                },
                 {
                     "source": "/Users/ronitvinocha/.gradle/caches/transforms-2/files-2.1/c97b0db2e77adb45592bee740aa5d495/cardview-1.0.0/res/values-v23/values-v23.xml",
                     "from": {
@@ -39,6 +20,25 @@
                         "endLines": "59",
                         "endColumns": "12",
                         "endOffsets": "4052"
+                    }
+                },
+                {
+                    "source": "/Users/ronitvinocha/StudioProjects/reddit/app/src/main/res/values-v23/styles.xml",
+                    "from": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "56",
+                        "endLines": "11",
+                        "endColumns": "12",
+                        "endOffsets": "551"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "10",
+                        "endColumns": "12",
+                        "endOffsets": "550"
                     }
                 },
                 {

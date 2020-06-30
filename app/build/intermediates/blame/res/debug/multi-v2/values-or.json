@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/ronitvinocha/StudioProjects/ImagesSubRedditViewer/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-or/values-or.xml",
+            "outputFile": "/Users/ronitvinocha/StudioProjects/reddit/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-or/values-or.xml",
             "map": [
                 {
                     "source": "/Users/ronitvinocha/.gradle/caches/transforms-2/files-2.1/8106c9afeb27cc0c50f85995740f877c/core-1.3.0/res/values-or/values-or.xml",

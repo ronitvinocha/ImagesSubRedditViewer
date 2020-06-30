@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/ronitvinocha/StudioProjects/ImagesSubRedditViewer/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-af/values-af.xml",
+            "outputFile": "/Users/ronitvinocha/StudioProjects/reddit/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-af/values-af.xml",
             "map": [
                 {
                     "source": "/Users/ronitvinocha/.gradle/caches/transforms-2/files-2.1/e46f3e16fd8948e8e4c48c913cb404d3/appcompat-1.1.0/res/values-af/values-af.xml",
