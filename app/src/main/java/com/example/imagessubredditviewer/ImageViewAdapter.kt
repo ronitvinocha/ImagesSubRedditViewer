@@ -28,6 +28,7 @@ class ImageViewAdapter(private val context:Context, private val values: List<Str
         else
         {
             viewHolder=view.tag as ViewHolder
+             viewHolder.imageView?.setImageBitmap(null)
         }
         var imview=viewHolder.imageView
          var imageLoader= ImageLoader(context)
